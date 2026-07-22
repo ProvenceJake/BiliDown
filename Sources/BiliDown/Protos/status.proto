@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package jijidown.core;
+
+option go_package = "github.com/JiJiDown/JiJiDownCore-go/common/jijidown";
+option csharp_namespace = "JiJiDown.Core.SDK";
+
+import "google/protobuf/empty.proto";
+import "type/servericon.proto";
+import "type/updatestatus.proto";
+
+service Status {
+  rpc Ping(google.protobuf.Empty) returns (StatusPingPong);
+  rpc CheckUpdate(google.protobuf.Empty) returns (stream StatusCheckUpdateReply);
+}
+
+message StatusPingPong {
+  string server_name = 1;
+  ServerIconType os_icon = 2;
+  string os_system_name = 3;
+}
+
+message StatusCheckUpdateReply {
+  UpdateStatusType status = 1;
+  string change_log = 2;
+}

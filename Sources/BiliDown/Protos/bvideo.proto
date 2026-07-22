@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package jijidown.core;
+
+option go_package = "github.com/JiJiDown/JiJiDownCore-go/common/jijidown";
+option csharp_namespace = "JiJiDown.Core.SDK";
+
+import "type/video.proto";
+import "type/api.proto";
+import "type/blinkresult.proto";
+
+service Bvideo {
+  rpc CheckContent(BvideoContentReq) returns (BvideoCheckContentReply);
+  rpc Info(BvideoContentReq) returns (BvideoInfoReply);
+  rpc AllQuality(BvideoAllQualityReq) returns (BvideoAllQualityReply);
+}
+
+message BvideoContentReq {
+  string content = 1;
+}
+
+message BvideoCheckContentReply {
+  bool is_valid = 1;
+  BLinkResult blink_result = 2;
+}
+
+message BvideoInfoReply {
+  BLinkResult blink_result = 1;
+  bytes video_cover = 2;
+  string video_title = 3;
+  string video_filename = 4;
+  string video_desc = 5;
+  string sub_sort = 6;
+  string sort = 7;
+  string up_name = 9;
+  int64 up_mid = 10;
+  bytes up_face = 11;
+  string bili_pubdate_str = 12;
+  bool is_stein_gate = 13;
+  repeated BvideoBlock block = 14;
+}
+
+message BvideoBlock {
+  string block_title = 1;
+  repeated BvideoPage list = 2;
+}
+
+message BvideoPage {
+  int64 page_av = 1;
+  string page_bv = 2;
+  int64 page_cid = 3;
+  int32 page_index = 4;
+  bytes page_cover = 5;
+  string page_title = 6;
+  repeated string page_info = 7;
+}
+
+message BvideoAllQualityReq {
+  int64 aid = 1;
+  string bvid = 2;
+  int64 cid = 3;
+}
+
+message BvideoBVideoItem {
+  uint32 quality_id = 1;
+  string quality_text = 2;
+  VideoType codec = 3;
+  string frame_rate = 4;
+  string bit_rate = 5;
+  string stream_size = 6;
+  ApiType api_type = 7;
+}
+
+message BvideoBAudioItem {
+  uint32 quality_id = 1;
+  string quality_text = 2;
+  string codec_text = 3;
+  string bit_rate = 4;
+  string stream_size = 5;
+  ApiType api_type = 6;
+}
+
+message BvideoAllQualityReply {
+  repeated BvideoBVideoItem video = 1;
+  repeated BvideoBAudioItem audio = 2;
+}

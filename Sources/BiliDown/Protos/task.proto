@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package jijidown.core;
+
+option go_package = "github.com/JiJiDown/JiJiDownCore-go/common/jijidown";
+option csharp_namespace = "JiJiDown.Core.SDK";
+
+import "google/protobuf/empty.proto";
+import "type/api.proto";
+import "type/video.proto";
+import "type/taskstatus.proto";
+import "type/taskdo.proto";
+
+service Task {
+  rpc New(TaskNewReq) returns (google.protobuf.Empty);
+  rpc NewBatch(TaskNewBatchReq) returns (TaskNewBatchReply);
+  rpc Status(TaskStatusReq) returns (TaskStatusReply);
+  rpc List(TaskListReq) returns (TaskListReply);
+  rpc Control(TaskControlReq) returns (google.protobuf.Empty);
+  rpc Notification(google.protobuf.Empty) returns (stream TaskNotificationReply);
+}
+
+message TaskNewReq {
+  int64 aid = 1;
+  string bvid = 2;
+  int64 cid = 3;
+  uint32 video_quality = 4;
+  uint32 audio_quality = 5;
+  VideoType video_codec = 6;
+  ApiType api_type = 7;
+  string save_filename = 8;
+  bool audio_only = 9;
+  uint64 callback = 10;
+}
+
+message TaskCreationStatus {
+  uint64 callback = 1;
+  string err = 2;
+}
+
+message TaskNewBatchReply {
+  repeated TaskCreationStatus task_creation_status = 1;
+}
+
+message TaskNewBatchReq {
+  repeated TaskNewReq new_tasks = 1;
+}
+
+message TaskStatusReq {
+  string task_id = 1;
+}
+
+message TaskProgress {
+  string total_length = 1;
+  string completed_length = 2;
+  string left_length = 3;
+  string download_speed = 4;
+  string eta = 5;
+  uint32 progress = 6;
+}
+
+message TaskStatusReply {
+  string task_id = 1;
+  string task_title = 2;
+  string video_badge = 3;
+  string audio_badge = 4;
+  string video_codec = 5;
+  ApiType api_type = 6;
+  bool audio_only = 7;
+  TaskStatusType task_status = 8;
+  int64 add_time = 9;
+  int64 complete_time = 10;
+  TaskProgress progress = 11;
+  string save_path = 12;
+}
+
+message TaskListReq {
+  TaskStatusType task_status = 1;
+}
+
+message TaskListReply {
+  repeated TaskStatusReply tasks = 1;
+}
+
+message TaskControlReq {
+  string task_id = 1;
+  TaskDo do = 2;
+}
+
+message TaskNotificationReply {
+  string task_id = 1;
+  string task_title = 2;
+  string average_speed = 3;
+  string elapsed_time = 4;
+}

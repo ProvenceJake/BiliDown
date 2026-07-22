@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package jijidown.core;
+
+option go_package = "github.com/JiJiDown/JiJiDownCore-go/common/jijidown";
+option csharp_namespace = "JiJiDown.Core.SDK";
+
+import "google/protobuf/empty.proto";
+
+service User {
+  rpc Info(google.protobuf.Empty) returns (UserInfoReply);
+  rpc LoginQRCode(UserLoginQRCodeReq) returns (UserLoginQRCodeReply);
+  rpc LoginStatus(UserLoginStatusReq) returns (stream UserLoginStatusReply);
+  rpc ImportCookie(UserImportCookieReq) returns (google.protobuf.Empty);
+}
+
+message UserInfoReply {
+  bool is_login = 1;
+  int64 mid = 2;
+  string uname = 3;
+  bytes face = 4;
+  bool vip_status = 5;
+  string vip_label_text = 6;
+  string badge = 7;
+}
+
+enum LoginQRCodeAPI {
+  LoginQRCodeAPI_WEB = 0;
+  LoginQRCodeAPI_TV = 1;
+}
+
+message UserLoginQRCodeReq {
+  LoginQRCodeAPI api = 1;
+}
+
+message UserLoginQRCodeReply {
+  bytes qr_code = 1;
+  string id = 2;
+}
+
+enum LoginStatus {
+  LoginStatus_UNKNOWN = 0;
+  LoginStatus_SUCCEEDED = 1;
+  LoginStatus_EXPIRED = 2;
+  LoginStatus_UNSCANNED = 3;
+  LoginStatus_UNCONFIRMED = 4;
+}
+
+message UserLoginStatusReq {
+  string id = 1;
+}
+
+message UserLoginStatusReply {
+  bool login_successful = 1;
+  LoginStatus status = 2;
+}
+
+message UserImportCookieReq {
+  string cookies = 1;
+  string access_token = 2;
+}
