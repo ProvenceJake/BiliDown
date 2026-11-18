@@ -10,7 +10,9 @@
 </p>
 <p align="center"><a href="README.md">English</a> · <strong>简体中文</strong></p>
 <p align="center">
-  <a href="#从源码构建"><strong>从源码构建</strong></a> ·
+  <a href="https://github.com/ProvenceJake/BiliDown/releases/download/v0.1.0/BiliDown-0.1.0-arm64.dmg"><strong>下载 Apple 芯片版</strong></a> ·
+  <a href="https://github.com/ProvenceJake/BiliDown/releases">版本说明</a> ·
+  <a href="#从源码构建">从源码构建</a> ·
   <a href="#快速使用">快速使用</a> ·
   <a href="https://github.com/ProvenceJake/BiliDown/issues">反馈问题</a>
 </p>
@@ -24,6 +26,17 @@ BiliDown 使用 [JiJiDownCore](https://client.sabe.cc/installation/macos/) 解�
 | 解析视频 | 选择保存内容 | 管理下载 |
 | --- | --- | --- |
 | 支持哔哩哔哩链接、`b23.tv` 短链、BV 号和 av 号。 | 支持选择分 P、选择核心提供的清晰度或只下载音频。使用 yt-dlp 时自动选择格式。 | 在应用里查看任务状态。JiJiDownCore 任务还支持暂停、继续和删除。 |
+
+## 安装
+
+1. 下载 [Apple 芯片版 DMG](https://github.com/ProvenceJake/BiliDown/releases/download/v0.1.0/BiliDown-0.1.0-arm64.dmg)，打开后将 **BiliDown.app** 拖到**应用程序**。
+2. 使用 Homebrew 安装外部工具。FFmpeg 用于合并音视频，yt-dlp 用于备用解析和下载。
+
+   ```sh
+   brew install ffmpeg yt-dlp
+   ```
+
+DMG 需要 macOS 15 或更高版本。应用采用 Ad Hoc 签名，未经 Apple 公证。如果 macOS 拦截首次启动，可以参考 [Apple 的打开说明](https://support.apple.com/zh-cn/102445)。SHA-256 校验值见[发布页](https://github.com/ProvenceJake/BiliDown/releases/tag/v0.1.0)。
 
 ## 从源码构建
 

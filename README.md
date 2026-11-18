@@ -10,7 +10,9 @@
 </p>
 <p align="center"><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></p>
 <p align="center">
-  <a href="#build-from-source"><strong>Build from source</strong></a> ·
+  <a href="https://github.com/ProvenceJake/BiliDown/releases/download/v0.1.0/BiliDown-0.1.0-arm64.dmg"><strong>Download for Apple Silicon</strong></a> ·
+  <a href="https://github.com/ProvenceJake/BiliDown/releases">Release notes</a> ·
+  <a href="#build-from-source">Build from source</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="https://github.com/ProvenceJake/BiliDown/issues">Report an issue</a>
 </p>
@@ -24,6 +26,17 @@ BiliDown uses [JiJiDownCore](https://client.sabe.cc/installation/macos/) to pars
 | Parse videos | Choose what to save | Manage downloads |
 | --- | --- | --- |
 | Paste a Bilibili URL, a `b23.tv` short link, a BV ID, or an av ID. | Select video parts, choose from the core's available quality options, or save audio only. The yt-dlp fallback uses automatic format selection. | See task status in the app. JiJiDownCore tasks also support pause, resume, and deletion. |
+
+## Install
+
+1. Download the [Apple Silicon DMG](https://github.com/ProvenceJake/BiliDown/releases/download/v0.1.0/BiliDown-0.1.0-arm64.dmg), open it, and drag **BiliDown.app** to **Applications**.
+2. Install the external tools with Homebrew. FFmpeg merges audio and video, and yt-dlp provides the fallback downloader.
+
+   ```sh
+   brew install ffmpeg yt-dlp
+   ```
+
+The DMG requires macOS 15 or later. The app is ad-hoc signed and has not been notarized by Apple. If macOS blocks the first launch, see [Apple's instructions for opening an unnotarized app](https://support.apple.com/en-us/102445). The SHA-256 checksum is listed on the [release page](https://github.com/ProvenceJake/BiliDown/releases/tag/v0.1.0).
 
 ## Build From Source
 
